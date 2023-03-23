@@ -272,7 +272,7 @@ function Hospital() {
               <>
                 {hospitals.map((hospital) => (
                   <Card
-                    style={{ width: "25rem" }}
+                    style={{ width: "22rem" }}
                     key={hospital._id}
                     ref={
                       hospital.id === hospitals[hospitals.length - 1].id
