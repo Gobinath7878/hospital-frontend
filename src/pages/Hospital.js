@@ -264,10 +264,10 @@ function Hospital() {
             className="d-flex flex-wrap align-items-center justify-content-between mb-5 mt-3 gap-5"
           >
             {hospitals.length === 0 ? (
-              <>
+              <div className="d-flex align-items-center justify-content-center w-100">
                 {" "}
                 <Spinner animation="border" role="status"></Spinner>
-              </>
+              </div>
             ) : (
               <>
                 {hospitals.map((hospital) => (
@@ -352,7 +352,7 @@ function Hospital() {
                           ) : (
                             <span className="p-3">
                               <i className="fa-solid fa-bed fs-5 px-3"></i>{" "}
-                              Rooms availability: {hospital.capacity}
+                              Rooms: {hospital.capacity}
                             </span>
                           )}
                         </Card.Subtitle>
