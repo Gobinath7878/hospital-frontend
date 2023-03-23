@@ -302,7 +302,7 @@ function Hospital() {
                               />
                             </>
                           ) : (
-                            <span className="p-5 mx-5 text-success">
+                            <span className="text-center p-4 mx-3 text-success">
                               {hospital.name}
                             </span>
                           )}
