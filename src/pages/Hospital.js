@@ -261,7 +261,7 @@ function Hospital() {
         <Row>
           <Col
             lg="12"
-            className="d-flex flex-wrap align-items-center justify-content-center mb-5 mt-3 gap-5"
+            className="d-flex flex-wrap align-items-center justify-content-between mb-5 mt-3 gap-5"
           >
             {hospitals.length === 0 ? (
               <>
@@ -272,7 +272,7 @@ function Hospital() {
               <>
                 {hospitals.map((hospital) => (
                   <Card
-                    style={{ width: "22rem" }}
+                    style={{ width: "20rem" }}
                     key={hospital._id}
                     ref={
                       hospital.id === hospitals[hospitals.length - 1].id
@@ -284,7 +284,7 @@ function Hospital() {
                     <form onSubmit={handleUpdateHospital}>
                       <Card.Body>
 
-                        <Card.Title>
+                        <Card.Title className="text-center ">
                           {editingHospitalId === hospital._id ? (
                             <>
                               <label htmlFor="name"> name:</label>
@@ -302,13 +302,13 @@ function Hospital() {
                               />
                             </>
                           ) : (
-                            <span className="text-center p-4 mx-3 text-success">
+                            <span className="text-success">
                               {hospital.name}
                             </span>
                           )}
                         </Card.Title>
 
-                        <Card.Subtitle className="mb-2">
+                        <Card.Subtitle className="mb-2 text-center ">
                           {editingHospitalId === hospital._id ? (
                             <>
                               <label htmlFor="name"> specialties:</label>
@@ -326,7 +326,7 @@ function Hospital() {
                               />
                             </>
                           ) : (
-                            <span className="p-3 p-5 mx-4 text-muted">
+                            <span className="text-muted">
                               {hospital.specialties}
                             </span>
                           )}
