@@ -7,6 +7,7 @@ import { ToastContainer } from "react-toastify";
 import { toast } from "react-toastify";
 import "../styles/Hospital.css";
 import Spinner from "react-bootstrap/Spinner";
+import Modal from "react-bootstrap/Modal";
 
 function Hospital() {
   const [hospitals, setHospitals] = useState([]);
@@ -29,6 +30,10 @@ function Hospital() {
   const [isLoading, setIsLoading] = useState(false);
   const [Loading, setLoading] = useState(false);
   const newHospitalRef = useRef(null);
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   //get all hospitals
   useEffect(() => {
@@ -146,15 +151,39 @@ function Hospital() {
         <Row>
           <Col lg="12">
             <div>
-              <h2 className="fw-bold">
+              <h2 className="fw-bold p-0">
                 <sup>
                   <i className="fa-solid fa-quote-left"></i>
                 </sup>
                 <span>"Putting Your Health First -</span> <br />
                 Discover Our Comprehensive Hospital Details Today!"
               </h2>
+              <p>
+                <span className="text-danger">*</span>It's important to ensure
+                that the hospitals credentials are correct, as this will be the
+                primary way of communicating with them through the Hospital
+                website.
+              </p>
+            </div>
+          </Col>
+        </Row>
+      </Container>
 
-              <form onSubmit={handleSubmit} className="p-2">
+      <Container className="h-title mt-3">
+        <Row>
+          <Col lg="12">
+            <div className="fw-bold text-center d-flex justify-content-center align-items-center flex-wrap gap-5">
+              <h1 className="mt-2 p-3 fw-bold">Hospitals List</h1>
+              <Button variant="success" onClick={handleShow}>
+                + Add Hospital
+              </Button>
+
+              <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                  <Modal.Title>Hospital Adding Form</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                <form onSubmit={handleSubmit} className="p-5 d-flex flex-column align-items-center adding-form">
                 <input
                   type="text"
                   id="name"
@@ -214,12 +243,12 @@ function Hospital() {
                     ))}
                   </ul>
                 )}
-
+ 
                 <button
                   type="submit"
                   disabled={isLoading}
                   style={{ backgroundColor: isLoading ? "green" : "" }}
-                  className="button-send w-25 "
+                  className="button-send"
                 >
                   {isLoading ? (
                     <>
@@ -235,23 +264,9 @@ function Hospital() {
                   )}{" "}
                 </button>
               </form>
-
-              <p>
-                <span className="text-danger">*</span>It's important to ensure
-                that the hospitals credentials are correct, as this will be the
-                primary way of communicating with them through the Hospital
-                website.
-              </p>
-            </div>
-          </Col>
-        </Row>
-      </Container>
-
-      <Container className="h-title mt-3">
-        <Row>
-          <Col lg="12">
-            <div className="fw-bold text-center">
-              <h1 className="mt-2 p-3 fw-bold">Hospitals List</h1>
+                </Modal.Body>
+                
+              </Modal>
             </div>
           </Col>
         </Row>
@@ -261,7 +276,7 @@ function Hospital() {
         <Row>
           <Col
             lg="12"
-            className="d-flex flex-wrap align-items-center justify-content-between mb-5 mt-3 gap-5"
+            className="d-flex flex-wrap align-items-center justify-content-center mb-5 mt-3 gap-5"
           >
             {hospitals.length === 0 ? (
               <div className="d-flex align-items-center justify-content-center w-100">
@@ -283,7 +298,6 @@ function Hospital() {
                   >
                     <form onSubmit={handleUpdateHospital}>
                       <Card.Body>
-
                         <Card.Title className="text-center ">
                           {editingHospitalId === hospital._id ? (
                             <>
@@ -376,7 +390,8 @@ function Hospital() {
                             </>
                           ) : (
                             <span className="p-3">
-                              <i className="fa-solid fa-location-dot fs-5 px-3"></i> &nbsp; {hospital.address}
+                              <i className="fa-solid fa-location-dot fs-5 px-3"></i>{" "}
+                              &nbsp; {hospital.address}
                             </span>
                           )}
                         </Card.Subtitle>
@@ -457,7 +472,8 @@ function Hospital() {
                                     handleDeleteHospital(hospital._id)
                                   }
                                 >
-                                  <i className="fa-solid fa-user-minus"></i> Remove
+                                  <i className="fa-solid fa-user-minus"></i>{" "}
+                                  Remove
                                 </Button>
                               </Card.Link>
                             </div>
