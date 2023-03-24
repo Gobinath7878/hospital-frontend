@@ -31,9 +31,10 @@ function Hospital() {
   const [Loading, setLoading] = useState(false);
   const newHospitalRef = useRef(null);
   const [show, setShow] = useState(false);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+
 
   //get all hospitals
   useEffect(() => {
@@ -65,10 +66,11 @@ function Hospital() {
         specialties: "",
       });
       setErrors(null);
-      toast.success(`${response.data.name} Hospital Added successfully`);
+      setShow(false)
       if (newHospitalRef.current) {
         newHospitalRef.current.scrollIntoView({ behavior: "smooth" });
       }
+      toast.success(`${response.data.name} Hospital Added successfully`);     
     } catch (err) {
       console.error(err);
       if (err.response.status === 400) {
@@ -95,7 +97,7 @@ function Hospital() {
     try {
       await api.delete(`/api/v1/hospitals/${id}`);
       setHospitals(hospitals.filter((hospital) => hospital._id !== id));
-      toast.success("Hospital deleted successfully");
+      toast.success(`Hospital deleted successfully`);
     } catch (error) {
       console.log(error);
       toast.error("Error deleting Hospital");
@@ -136,7 +138,7 @@ function Hospital() {
         specialties: "",
       });
       setEditingHospitalId(null);
-      toast.success("hospital updated successfully");
+      toast.success(`${response.data.name} updated successfully`);
     } catch (error) {
       console.log(error);
       toast.error("Error updating hospital");
@@ -245,6 +247,7 @@ function Hospital() {
                 )}
  
                 <button
+                  
                   type="submit"
                   disabled={isLoading}
                   style={{ backgroundColor: isLoading ? "green" : "" }}
@@ -276,7 +279,7 @@ function Hospital() {
         <Row>
           <Col
             lg="12"
-            className="d-flex flex-wrap align-items-center justify-content-center mb-5 mt-3 gap-5"
+            className="d-flex flex-wrap align-items-center justify-content-around mb-5 mt-3 gap-5"
           >
             {hospitals.length === 0 ? (
               <div className="d-flex align-items-center justify-content-center w-100">
@@ -298,6 +301,7 @@ function Hospital() {
                   >
                     <form onSubmit={handleUpdateHospital}>
                       <Card.Body>
+
                         <Card.Title className="text-center ">
                           {editingHospitalId === hospital._id ? (
                             <>
